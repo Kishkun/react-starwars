@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            people: {},
+            isLoading: false
+        }
+    }
+
+    async componentDidMount() {
+        try {
+            await axios.get(`https://swapi.dev/api/people/1`)
+                .then(response => {
+                    const people = response.data;
+                    this.setState({
+                        people,
+                        isLoading: true
+                    });
+                })
+        } catch (err) {
+            console.log(`😱 Axios request failed: ${err}`);
+        }
+    }
+
+    renderPeople = (people) => {
+        return(
+            <li>{people.name}</li>
+        )
+    };
+
+    render() {
+        let {isLoading, people} = this.state;
+        return (
+            <ul>
+                {isLoading && this.renderPeople(people)}
+            </ul>
+        );
+    }
 }
 
 export default App;
