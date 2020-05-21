@@ -1,0 +1,17 @@
+.error-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+.error-button-block {
+    display: inline-block;
+}
+.error-button-block .error-button {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+
+.row {
+    margin-bottom: 2rem;
+}

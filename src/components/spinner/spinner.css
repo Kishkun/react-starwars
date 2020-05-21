@@ -79,7 +79,7 @@
     height: 65px;
     display: inline-block;
     overflow: hidden;
-    background: #303030;
+    background: transparent;
     margin: 0 auto;
 }
 .ldio {

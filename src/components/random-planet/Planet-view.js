@@ -3,6 +3,7 @@ import "./random-planet.css";
 
 const PlanetView = ({planet}) => {
     const {id, planetName, population, rotationPeriod, diameter} = planet;
+
     return (
         <>
             <img className="planet-image"
