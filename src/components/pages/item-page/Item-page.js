@@ -1,11 +1,11 @@
 import React from "react";
-import "./people-page.css";
+import "./item-page.css";
 import ItemList from "../../item-list/Item-list";
-import PersonDetails from "../../person-details/Person-details";
+import ItemDetails from "../../item-details/Item-details";
 import Row from "../../row/Row";
 import ErrorBoundry from "../../error-boundry/Error-boundry";
 
-class PeoplePage extends React.Component {
+class ItemPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -22,7 +22,7 @@ class PeoplePage extends React.Component {
 
     render() {
         const {selectedItem} = this.state;
-        const {getData, renderItem} = this.props;
+        const {getData, getItem, renderItem, getImageUrl} = this.props;
 
         const itemList = (
             <ItemList onItemSelected={this.onItemSelected}
@@ -32,16 +32,19 @@ class PeoplePage extends React.Component {
             />
         );
 
-        const personDetails = (
-            <PersonDetails personId={selectedItem}/>
+        const itemDetails = (
+            <ItemDetails itemId={selectedItem}
+                         getItem={getItem}
+                         getImageUrl={getImageUrl}
+            />
         );
 
         return (
             <ErrorBoundry>
-                <Row left={itemList} right={personDetails}/>
+                <Row left={itemList} right={itemDetails}/>
             </ErrorBoundry>
         )
     }
 }
 
-export default PeoplePage;
+export default ItemPage;

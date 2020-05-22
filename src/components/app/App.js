@@ -5,7 +5,7 @@ import RandomPlanet from "../random-planet/Random-planet";
 import ToggleRandomPlanet from "../buttons/Toggle-random-planet";
 import ErrorButton from "../buttons/Error-button";
 import ErrorIndicator from "../error-indicator/Error-indicator";
-import PeoplePage from "../pages/people-page/People-page";
+import ItemPage from "../pages/item-page/Item-page";
 import SwapiService from "../../services/swapi-service";
 
 class App extends React.Component {
@@ -32,6 +32,14 @@ class App extends React.Component {
 
     render() {
         const {isShow, hasError} = this.state;
+        const {
+            getAllPeople,
+            getPerson,
+            getPersonImage,
+            getAllPlanets,
+            getPlanet,
+            getPlanetImage
+        } = this.swapiService;
 
         if (hasError) {
             return (
@@ -51,12 +59,17 @@ class App extends React.Component {
                 <div className="error-button-block">
                     <ErrorButton/>
                 </div>
-                <PeoplePage getData={this.swapiService.getAllPeople}
-                            renderItem={({name, gender}) => `${name} (${gender})`}
+                <ItemPage getData={getAllPeople}
+                          getItem={getPerson}
+                          getImageUrl={getPersonImage}
+                          renderItem={({name, gender}) => `${name} (${gender})`}
                 />
-                {/*<PlanetPage getData={this.swapiService.getAllPlanets}*/}
-                {/*            renderItem={({planetName, diameter}) => `${planetName} (${diameter})`}*/}
-                {/*/>*/}
+
+                <ItemPage getData={getAllPlanets}
+                          getItem={getPlanet}
+                          getImageUrl={getPlanetImage}
+                          renderItem={({planetName, diameter}) => `${planetName} (${diameter})`}
+                />
             </div>
         );
     }

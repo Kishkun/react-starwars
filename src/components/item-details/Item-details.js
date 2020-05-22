@@ -1,28 +1,27 @@
 import React from "react";
 
-import "./person-details.css";
-import SwapiService from "../../services/swapi-service";
-import PersonView from "./Person-view";
+import "./item-details.css";
+import ItemView from "./Item-view";
 import Spinner from "../spinner/Spinner";
 import ErrorIndicator from "../error-indicator/Error-indicator";
 
-class PersonDetails extends React.Component {
-
-    swapiService = new SwapiService();
+class ItemDetails extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            person: null,
+            item: null,
             error: false,
-            isLoading: false
+            isLoading: false,
+            image: null
         }
     }
 
-    onPersonLoaded = (person) => {
+    onItemLoaded = (item) => {
         this.setState({
-            person,
-            isLoading: !this.state.isLoading
+            item,
+            isLoading: !this.state.isLoading,
+            image: this.props.getImageUrl(item)
         })
     };
 
@@ -32,25 +31,25 @@ class PersonDetails extends React.Component {
         })
     };
 
-    updatePerson = () => {
-        const id = this.props.personId;
-        if (!id) {
+    updateItem = () => {
+        const {itemId, getItem } = this.props;
+
+        if (!itemId) {
             return;
         }
-        this.swapiService
-            .getPerson(id)
-            .then(this.onPersonLoaded)
+        getItem(itemId)
+            .then(this.onItemLoaded)
             .catch(this.onError)
     };
 
     componentDidMount() {
-        this.updatePerson();
+        this.updateItem();
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.personId !== prevProps.personId) {
-            this.updatePerson();
-            this.timeout = setTimeout(this.updatePerson, 1500);
+        if (this.props.itemId !== prevProps.itemId) {
+            this.updateItem();
+            this.timeout = setTimeout(this.updateItem, 1500);
         }
     }
 
@@ -59,13 +58,13 @@ class PersonDetails extends React.Component {
     }
 
     render() {
-        const {person, error, isLoading} = this.state;
+        const {item, error, isLoading, image} = this.state;
 
         if (error) {
             return <ErrorIndicator/>
         }
 
-        if (!person) {
+        if (!item) {
             return <span>Select a person from a list</span>
         }
         return (
@@ -73,11 +72,11 @@ class PersonDetails extends React.Component {
                 {
                     isLoading ?
                         <Spinner/> :
-                        <PersonView person={person}/>
+                        <ItemView item={item} image={image}/>
                 }
             </div>
         )
     }
 }
 
-export default PersonDetails;
+export default ItemDetails;

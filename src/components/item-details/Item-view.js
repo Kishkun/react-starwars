@@ -1,28 +1,29 @@
 import React from "react";
 
-import "./person-details.css";
+import "./item-details.css";
 import ErrorButton from "../buttons/Error-button";
 
-const PersonView = ({person}) => {
+const ItemView = ({item, image}) => {
 
+    console.log(item);
     return (
         <>
             <img className="person-image"
-                 src={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`} alt="person"/>
+                 src={image} alt="person"/>
             <div className="card-body">
-                <h4>{person.name}</h4>
+                <h4>{item.name}</h4>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                         <span className="term">Gender</span>
-                        <span>{person.gender}</span>
+                        <span>{item.gender}</span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">Birth Year</span>
-                        <span>{person.birthYear}</span>
+                        <span>{item.birthYear}</span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">Eye Color</span>
-                        <span>{person.eyeColor}</span>
+                        <span>{item.eyeColor}</span>
                     </li>
                     <li className="list-group-item">
                         <ErrorButton/>
@@ -33,4 +34,4 @@ const PersonView = ({person}) => {
     )
 };
 
-export default PersonView;
+export default ItemView;
