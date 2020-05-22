@@ -2,15 +2,15 @@ import React from "react";
 import "./people-page.css";
 import ItemList from "../../item-list/Item-list";
 import PersonDetails from "../../person-details/Person-details";
-import ErrorIndicator from "../../error-indicator/Error-indicator";
+import Row from "../../row/Row";
+import ErrorBoundry from "../../error-boundry/Error-boundry";
 
-class PeoplePage extends React.Component{
+class PeoplePage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            selectedItem: null,
-            hasError: false
+            selectedItem: null
         }
     }
 
@@ -20,35 +20,26 @@ class PeoplePage extends React.Component{
         })
     };
 
-    componentDidCatch(error, errorInfo) {
-        this.setState({hasError: true})
-    }
-
     render() {
-        const {selectedItem, hasError} = this.state;
+        const {selectedItem} = this.state;
         const {getData, renderItem} = this.props;
 
-        if (hasError) {
-            return (
-                <div className="error-wrapper">
-                    <ErrorIndicator/>
-                </div>
-            )
-        }
+        const itemList = (
+            <ItemList onItemSelected={this.onItemSelected}
+                      selectedItem={selectedItem}
+                      getData={getData}
+                      renderItem={renderItem}
+            />
+        );
+
+        const personDetails = (
+            <PersonDetails personId={selectedItem}/>
+        );
 
         return (
-            <div className="row mb2">
-                <div className="col-md-6">
-                    <ItemList onItemSelected={this.onItemSelected}
-                              selectedItem={selectedItem}
-                              getData={getData}
-                              renderItem={renderItem}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <PersonDetails personId={selectedItem}/>
-                </div>
-            </div>
+            <ErrorBoundry>
+                <Row left={itemList} right={personDetails}/>
+            </ErrorBoundry>
         )
     }
 }

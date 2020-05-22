@@ -6,7 +6,6 @@ import ToggleRandomPlanet from "../buttons/Toggle-random-planet";
 import ErrorButton from "../buttons/Error-button";
 import ErrorIndicator from "../error-indicator/Error-indicator";
 import PeoplePage from "../pages/people-page/People-page";
-import PlanetPage from "../pages/planet-page/Planet-page";
 import SwapiService from "../../services/swapi-service";
 
 class App extends React.Component {
@@ -55,9 +54,9 @@ class App extends React.Component {
                 <PeoplePage getData={this.swapiService.getAllPeople}
                             renderItem={({name, gender}) => `${name} (${gender})`}
                 />
-                <PlanetPage getData={this.swapiService.getAllPlanets}
-                            renderItem={({planetName, diameter}) => `${planetName} (${diameter})`}
-                />
+                {/*<PlanetPage getData={this.swapiService.getAllPlanets}*/}
+                {/*            renderItem={({planetName, diameter}) => `${planetName} (${diameter})`}*/}
+                {/*/>*/}
             </div>
         );
     }
