@@ -47,7 +47,7 @@ class SwapiService {
     };
 
     getStarshipImage = ({id}) => {
-        return `${this._imageBase}/starships/${id}.jpg`;
+        return `${this. _imageBase}/starships/${id}.jpg`;
     };
 
     getAllPlanets = async () => {
@@ -70,7 +70,7 @@ class SwapiService {
     _transformPlanet = (planet) => {
         return {
             id: this._extractId(planet),
-            planetName: planet.name,
+            name: planet.name,
             population: planet.population,
             rotationPeriod: planet.rotation_period,
             diameter: planet.diameter

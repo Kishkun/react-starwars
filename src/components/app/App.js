@@ -7,6 +7,7 @@ import ErrorButton from "../buttons/Error-button";
 import ErrorIndicator from "../error-indicator/Error-indicator";
 import ItemPage from "../pages/item-page/Item-page";
 import SwapiService from "../../services/swapi-service";
+import Record from "../item-details/Record-view";
 
 class App extends React.Component {
 
@@ -63,13 +64,19 @@ class App extends React.Component {
                           getItem={getPerson}
                           getImageUrl={getPersonImage}
                           renderItem={({name, gender}) => `${name} (${gender})`}
-                />
+                >
+                    <Record field="gender" label="Gender" />
+                    <Record field="eyeColor" label="Eye Color" />
+                </ItemPage>
 
                 <ItemPage getData={getAllPlanets}
                           getItem={getPlanet}
                           getImageUrl={getPlanetImage}
-                          renderItem={({planetName, diameter}) => `${planetName} (${diameter})`}
-                />
+                          renderItem={({name, diameter}) => `${name} (${diameter})`}
+                >
+                    <Record field="population" label="Population" />
+                    <Record field="diameter" label="Diameter" />
+                </ItemPage>
             </div>
         );
     }

@@ -59,6 +59,7 @@ class ItemDetails extends React.Component {
 
     render() {
         const {item, error, isLoading, image} = this.state;
+        const {children} = this.props;
 
         if (error) {
             return <ErrorIndicator/>
@@ -72,7 +73,11 @@ class ItemDetails extends React.Component {
                 {
                     isLoading ?
                         <Spinner/> :
-                        <ItemView item={item} image={image}/>
+                        <ItemView
+                            item={item}
+                            image={image}
+                            children={children}
+                        />
                 }
             </div>
         )

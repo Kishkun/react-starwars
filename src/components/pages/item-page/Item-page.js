@@ -22,7 +22,12 @@ class ItemPage extends React.Component {
 
     render() {
         const {selectedItem} = this.state;
-        const {getData, getItem, renderItem, getImageUrl} = this.props;
+        const {
+            getData,
+            getItem,
+            renderItem,
+            getImageUrl,
+            children} = this.props;
 
         const itemList = (
             <ItemList onItemSelected={this.onItemSelected}
@@ -36,6 +41,7 @@ class ItemPage extends React.Component {
             <ItemDetails itemId={selectedItem}
                          getItem={getItem}
                          getImageUrl={getImageUrl}
+                         children={children}
             />
         );
 
