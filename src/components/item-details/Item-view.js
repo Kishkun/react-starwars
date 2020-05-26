@@ -14,7 +14,7 @@ const ItemView = (props) => {
                 <ul className="list-group list-group-flush">
                     {
                         React.Children.map(children, (child) => {
-                            return child
+                            return React.cloneElement(child, {item})
                         })
                     }
                     <li className="list-group-item">
